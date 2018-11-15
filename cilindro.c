@@ -4,7 +4,7 @@
 #include "cilindro.h"
 
 void* leerCilindro()
-{	
+{
 	Vector vec;
 	float r,g,b;
 	cilindro* c;
@@ -32,6 +32,3 @@ void* leerCilindro()
 	
 	return c;
 }
-
-
-

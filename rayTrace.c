@@ -16,13 +16,8 @@
 #include <ctype.h>
 
 #include "rayTrace.h"
-//#include "Esfera.h"
-//#include "cilindro.h"
 #include "estructuras.h" 
 #include "estructuras.c"
-
-//Funciones Interseccion;
-//float calculoInterseccion();
 
 unsigned int ancho;
 unsigned int alto;
@@ -34,7 +29,6 @@ unsigned int epsilon = 0.000001;
 float pixeles[5008*5000*3];
 
 cuerpo* objetos;
-//Esfera* esferasO;
 int totalEsferas;
 Vector luces[1000];
 
@@ -62,8 +56,6 @@ bool llaveTransparencia = false, llaveProfundidad = false;
 FILE *file; 
 
 // Inicio de las funciones de trabajo
-
-
 int escribirArchivo() {
 
     FILE *fp = fopen("out.tga", "w");
@@ -108,6 +100,10 @@ void inicioVectores() {
     alto = getInt(1);
     readInt();
     muestras = getInt(0);
+    llaveAntiAlias = (bool)getInt(1);
+    llaveRefleccion = (bool)getInt(2);
+    llaveTransparencia = (bool)getInt(3);
+    llaveProfundidad = (bool)getInt(4);
     readInt();
     numeroCuerpos = getInt(0);
 
@@ -182,8 +178,6 @@ void inicioVectores() {
     } 
 }
 
-
-
 bool sombra(Rayo rayo){
     for (int i = 0; i < numeroCuerpos; i++)
     {
@@ -227,19 +221,6 @@ Rayo analisisRayoVision(float i, float j, Vector origen){
     return rayo;
 }
 
-Rayo analisisRayoVisionNormal(float i, float j){
-    Rayo rayo;
-
-    float us = izq + (der-izq) * (i+0.5) / ancho;
-    float vs = abajo + (arriba-abajo) * (j+0.5) / alto;
-
-    rayo.origen = e;
-    rayo.direccion = sumaVector(escalaVector(w,-1*d),sumaVector(escalaVector(u,us), escalaVector(v,vs)));
-    rayo.direccion = escalaVector(rayo.direccion,1/magnitud(rayo.direccion));
-
-    return rayo;
-}
-
 Color blur(Vector vector,Color color, int numluces){
     float valor = pPunto(vector,luces[numluces]);
     float max = (valor > 0) ? valor : 0;
@@ -266,7 +247,6 @@ Color choqueRayo(Rayo rayo, int valor){
         //choque.n = escalaVector(choque.n,1/magnitud(choque.n));
         return shade(choque, rayo, valor);
     }
-
     return colorFondo;
 }
 
@@ -327,15 +307,10 @@ Color atenuacion(float factor, Color color) {
 Color shade(Choque choque, Rayo rayo, int valor){
     Color color = setColor(0,0,0);
     Solido figSolid;
-    //Esfera figSphere;
     cuerpo* figBody;
-    
-    figBody = (cuerpo*)choque.objeto->obj;
-    figSolid = (*(Solido*) figBody);
-    //figSphere = (*(Esfera*) figSolid.figura);
-    //printf("r: %f\n", figSphere.color.r);
-    //printf("g: %f\n", figSphere.color.g);
-    //printf("b: %f\n", figSphere.color.b);
+
+    figBody = (cuerpo*)choque.objeto;
+    figSolid = (*(Solido*) figBody->obj);
 
     color = ambiente(figSolid.color);
 
