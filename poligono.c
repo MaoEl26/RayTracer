@@ -1,4 +1,5 @@
 #include "poligono.h"
+#include "estructuras.h"
 
 void* leerPoligono(){
 
@@ -52,32 +53,27 @@ void normalizarPoly(poligono * fig){
 	fig->d = d;
 }
 
-float puntoEnPlano(Solido * sol, Vector ojo, Vector p){
+float puntoEnPlano(Solido * sol, Rayo rayo){
 
 	poligono fig;
 	fig = *((poligono*)(sol->figura));
 
 	float a, b, c, d, denom;
-	float t, *interseccion;
+	float t; //*interseccion;
 	
 	a = fig.a;
 	b = fig.b;
 	c = fig.c;
 	d = fig.d;
-	
-	//printf("%f\n", figuras[idFigura].values[0]);
-	//printf("%f\n", figuras[idFigura].values[1]);
-	//printf("%f\n", figuras[idFigura].values[2]);
-	//printf("%f\n", figuras[idFigura].values[3]);
 
-	denom = (a*p.x+b*p.y+c*p.z);
+	denom = (a*rayo.direccion.x+b*rayo.direccion.y+c*rayo.direccion.z);
 	
 	if (denom > EPSILON||denom<EPSILON)
 	{
 
-		if (puntoEnFigura(ojo, p, fig) == 1)
+		if (puntoEnFigura(rayo.direccion, rayo.origen, fig) == 1)
 		{
-			t = -(a*ojo.x + b*ojo.y + c*ojo.z + d)/denom;
+			t = -(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z + d)/denom;
 		}
 		else
 		{

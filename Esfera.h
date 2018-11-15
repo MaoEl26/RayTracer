@@ -17,4 +17,6 @@ void* leerEsfera(void);
 
 float calculoInterseccion(Solido *figSolido, Rayo rayo);
 
+Vector normalEsfera(Solido *figSolido, Vector punto);
+
 #endif
