@@ -177,6 +177,7 @@ void inicioVectores() {
         {
             printf("Siiiiii\n");
             objetos[i].interseccion = calculoInterseccion;
+            objetos[i].normal = normalEsfera;
         }
     } 
 }
@@ -254,15 +255,15 @@ Color ambiente(Color color){
 Color choqueRayo(Rayo rayo, int valor){
     Choque choque;
     Solido figSolido;
-    Esfera figSphere;
     choqueEscena(rayo,&choque);
 
     if(choque.t > epsilon){
-        figSolido = *(Solido*)(choque.objeto->obj);
-        figSphere = *(Esfera*)(figSolido.figura);
+        //figSolido = *(Solido*)(choque.objeto->obj);
         choque.p = sumaVector(rayo.origen, escalaVector(rayo.direccion,choque.t-0.01));
-        choque.n = escalaVector(restaVector(choque.p, figSphere.c),-1/figSphere.r);
-        choque.n = escalaVector(choque.n,1/magnitud(choque.n));
+        choque.n = choque.objeto->normal(choque.objeto->obj, choque.p);
+
+        //choque.n = escalaVector(restaVector(choque.p, figSphere.c),-1/figSphere.r);
+        //choque.n = escalaVector(choque.n,1/magnitud(choque.n));
         return shade(choque, rayo, valor);
     }
 

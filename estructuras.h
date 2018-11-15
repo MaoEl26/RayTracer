@@ -35,14 +35,16 @@ typedef struct
 }Rayo;
 
 typedef float (*Op1)(Solido *i, Rayo rayo);
+typedef Vector (*Op2)(Solido *i, Vector punto);
 
 typedef struct
 {
 	Solido* obj;
 	Op1 interseccion;
+	Op2 normal;
 	int id;
 	float ri;
-	int refleccion;	
+	int refleccion;
 }cuerpo;
 
 typedef struct
