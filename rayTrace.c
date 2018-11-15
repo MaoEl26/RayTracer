@@ -363,7 +363,6 @@ Color shade(Choque choque, Rayo rayo, int valor){
         Vector temp;
         float valTemp;
 
-
         if (pPunto(rayo.direccion, choque.n) < 0) {
             refraccion(rayo.direccion, choque.n, figBody->ri, &temp);
             valTemp = pPunto(escalaVector(rayo.direccion,-1), choque.n);

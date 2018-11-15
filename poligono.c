@@ -170,28 +170,21 @@ float puntoEnFigura(Vector ojo, Vector p, poligono fig){
 
 	temp=0;
 
-	a = abs(fig.a);
-	b = abs(fig.b);
-	c = abs(fig.c);
-	d = abs(fig.d);
+	a = fig.a;
+	b = fig.b;
+	c = fig.c;
+	d = fig.d;
 
-	if(a >= temp){
-		temp = a;
-	}
-	if(b >= temp){
-		temp = b;
-	}
-	if(c >= temp){
-		temp = c;
-	}
-	
-	if(a == temp){
+	if(abs(a) >= temp){
+		temp = abs(a);
 		flag = 1;
 	}
-	else if(b == temp){
+	if(abs(b) >= temp){
+		temp = abs(b);
 		flag = 2;
 	}
-	else if(c == temp){
+	if(abs(c) >= temp){
+		temp = abs(c);
 		flag = 3;
 	}
 	
