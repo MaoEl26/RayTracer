@@ -1,11 +1,8 @@
-/* Tarea Programada #2 
+/* Tarea Programada #3
  * Autor: Mauricio Castillo Vega
- * Autor: Geovanny Astorga Lopez
+ * Autor: Ricardo Sanchez Alpizar
  * Curso: Computer Graphics 2-2018
  * Profesor: Dr. Francisco Torres
- * Fuentes Principales:
- * https://gist.github.com/veb/4a184a1f53e5fa9fea02
- * https://github.com/trentmwillis/ray-tracer
  */
 
 #include <GL/glut.h>
