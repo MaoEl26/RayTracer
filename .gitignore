@@ -49,6 +49,8 @@
 *.bin
 *.log
 *.cmake
+*.xml
+*.iml
 
 # Kernel Module Compile Results
 *.mod*
