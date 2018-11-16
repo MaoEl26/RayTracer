@@ -25,25 +25,26 @@ void* readSolid()
 	FILE *file = retFile();
 	fgets(str, 100, file);
 
-	s = (Solido*)malloc(sizeof(Solido));
+	s = NULL;
 	char chars[100];
 	memmove(&str[strlen(str)-1],&str[strlen(str)],strlen(str)-1);
 	
 	for(i=0;i<sizeof(ID)/sizeof(char*);++i){
-		if(strcmp(str,ID[i]) == 0)
-		{	
+		if(strcmp(str,ID[i]) == 0){
 			float r,g,b;
-			s->tipo = i;
-			s->figura = READ[i]();
-			readFloat();
-			r = getFloat(0);
-			g = getFloat(1);
-			b = getFloat(2);
-			printf("asq %f\n",getFloat(0));
-			s->color.r = r;
-			s->color.g = g;
-			s->color.b = b;
-			return s;
+			//if(i!=3) {
+				printf("in?\n");
+				s = (Solido*)malloc(sizeof(Solido));
+				s->tipo = i;
+				s->figura = READ[i]();
+				readFloat();
+				r = getFloat(0);
+				g = getFloat(1);
+				b = getFloat(2);
+				s->color.r = r;
+				s->color.g = g;
+				s->color.b = b;
+				return s;
 		}
 	}
 	return NULL;
