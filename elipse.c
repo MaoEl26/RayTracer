@@ -17,11 +17,6 @@ void* leerElipse(){
 		z = getFloat(2);
 		fig->puntos[i] = setVector(x,y,z);
 	}
-	readFloat();
-	x = getFloat(0);
-	y = getFloat(1);
-	z = getFloat(2);
-	fig->color = setColor(x,y,z);
 
 	readFloat();
 	x = getFloat(0);

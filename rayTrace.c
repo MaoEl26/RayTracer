@@ -19,6 +19,7 @@
 #include "estructuras.h" 
 #include "estructuras.c"
 #include "poligono.h"
+#include "disco.h"
 
 unsigned int ancho;
 unsigned int alto;
@@ -176,6 +177,11 @@ void inicioVectores() {
             printf("Siiiiii\n");
             objetos[i].interseccion = puntoEnPlano;
             objetos[i].normal = calcularNormalPoligono;
+        }
+        if (objetos[i].obj->tipo == 4){
+            printf("Siiiiii\n");
+            objetos[i].interseccion = calculoInterseccionDisco;
+            objetos[i].normal = calcularNormalDisco;
         }
     } 
 }
@@ -402,20 +408,22 @@ void display(){
     srand(time(NULL));
 
     Solido figSolid;
-    poligono figSphere;
+    disco figSphere;
     cuerpo* figBody;
     
     for (int i = 0; i < numeroCuerpos; ++i)
     {
         figBody = (cuerpo*)objetos[i].obj;
         figSolid = (*(Solido*) figBody);
-        figSphere = (*(poligono*) figSolid.figura);
+        figSphere = (*(disco*) figSolid.figura);
         printf("%d\n", i);
         printf("puntos: %d\n", figSphere.cantidadPuntos);
+        printf("Radio: %f\n",figSphere.r);
+        printf("Radio pequeño: %f\n",figSphere.rPeq);
         printf("r: %f\n", figSolid.color.r);
         printf("g: %f\n", figSolid.color.g);
         printf("b: %f\n", figSolid.color.b);
-        printf("c.x: %f\n", figSphere.c);
+        printf("c: %f\n", figSphere.c);
         printf("a: %f\n", figSphere.a);
         printf("b: %f\n", figSphere.b);
         printf("d: %f\n", figSphere.d);

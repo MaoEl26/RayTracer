@@ -8,11 +8,11 @@ typedef struct
 {
 	Vector* puntos;
 	int cantidadPuntos;
+	Vector centro;
 	float a;
 	float b;
 	float c;
 	float d;
-	Color color; 
 	float r;
 	float rPeq;
 }disco;
@@ -20,5 +20,11 @@ typedef struct
 void* leerDisco();
 
 void normalizarDisco(disco *fig);
+
+Vector calcularNormalDisco(Solido *figSolido, Vector punto);
+
+float calculoInterseccionDisco(Solido* sol,Rayo rayo);
+
+int puntoEnDisco(Vector rayo, disco fig);
 
 #endif

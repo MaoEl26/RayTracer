@@ -12,7 +12,6 @@ typedef struct
 	float b;
 	float c;
 	float d;
-	Color color; 
 	Vector foco1;
 	Vector foco2;
 	float r;
@@ -21,5 +20,7 @@ typedef struct
 void* leerElipse();
 
 void normalizarElipse(elipse * fig);
+
+
 
 #endif

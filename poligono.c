@@ -29,7 +29,7 @@ void normalizarPoly(poligono * fig){
 	Vector centro,izq,der;
 	Vector vectA,vectB;
 	Vector pcruz;
-	float d;
+	float d, norma;
 
 	centro = fig->puntos[0];
 	izq = fig->puntos[1];
@@ -39,7 +39,9 @@ void normalizarPoly(poligono * fig){
 	vectB = restaVector(centro,der);
 	pcruz = pCruz(vectA,vectB);
 
-	d = pPunto(escalaVector(pcruz,-1/magnitud(pcruz)),escalaVector(centro,-1/magnitud(pcruz)));
+	norma = magnitud(pcruz);
+
+	d = -pPunto(pcruz,centro);
 
 	pcruz = escalaVector(pcruz,1/magnitud(pcruz));
 
@@ -70,7 +72,7 @@ float puntoEnPlano(Solido * sol, Rayo rayo){
 		if (puntoEnFigura(rayo.origen, rayo.direccion, fig) == 1)
 		{
 		    printf("punto en figura");
-			t = -(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z + d)/denom;
+			t = (-(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z) + d)/denom;
 			//printf("%f",t);
 		}
 		else
@@ -218,9 +220,8 @@ int puntoEnFigura(Vector ojo, Vector p, poligono fig){
 		punto.x = ojo.x + t * p.x;
 		punto.y = ojo.y + t * p.y;
 		punto.z = ojo.z + t * p.z;
-		//printf("%f denominador\n", denominador);
-		//printf("%f t\n", t);
-        //printf("%d flag\n", flag);
+		printf("%f denominador\n", denominador);
+		printf("%f t\n", t);
 		if(testFigura(fig,flag,punto)==1){
 			return 1;
 		}

@@ -85,6 +85,10 @@ float magnitud(Vector vector){
     return sqrt(vector.x*vector.x + vector.y*vector.y + vector.z*vector.z);
 }
 
+float distanciaEucladiana(Vector vec1,Vector vec2){
+    return sqrt(pow((vec2.x-vec1.x),2)+pow((vec2.y-vec1.y),2)+pow((vec2.z-vec1.z),2));
+}
+
 float pPunto(Vector vector1, Vector vector2){
 	return (vector1.x * vector2.x) + (vector1.y * vector2.y) + (vector1.z * vector2.z);
 }
