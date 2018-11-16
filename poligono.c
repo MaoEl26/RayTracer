@@ -265,7 +265,7 @@ int puntoEnFigura(Vector ojo, Vector p, poligono fig){
 	return c;*/
 }
 
-Vector calcularNormalPoligono(Solido *figSolido, Vector punto)
+Vector calcularNormalPoligono(Solido *figSolido, Vector punto, Vector direccion)
 {
 	Vector normal;
 	poligono fig;
@@ -273,6 +273,10 @@ Vector calcularNormalPoligono(Solido *figSolido, Vector punto)
 	normal.x = fig.a;
 	normal.y = fig.b;
 	normal.z = fig.c;
+
+    if (pPunto(direccion, normal) < 0){
+        normal = escalaVector(normal, -1);
+    }
 
 	return normal;
 }

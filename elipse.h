@@ -21,6 +21,10 @@ void* leerElipse();
 
 void normalizarElipse(elipse * fig);
 
+Vector calcularNormalElipse(Solido *figSolido, Vector punto, Vector direccion);
 
+float calculoInterseccionElipse(Solido* sol,Rayo rayo);
+
+int puntoEnElipse(Vector rayo, elipse fig);
 
 #endif

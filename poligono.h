@@ -24,7 +24,7 @@ int puntoEnFigura(Vector ojo, Vector p, poligono fig);
 
 void normalizarPoly(poligono * poly);
 
-Vector calcularNormalPoligono(Solido *figSolido, Vector punto);
+Vector calcularNormalPoligono(Solido *figSolido, Vector punto, Vector direccion);
 
 int puntoEnSegmento(Vector p,Rayo segmento);
 

@@ -53,13 +53,17 @@ float calculoInterseccion (Solido *figSolido, Rayo rayo) {
 	}
 }
 
-Vector normalEsfera(Solido *figSolido, Vector punto){
+Vector normalEsfera(Solido *figSolido, Vector punto, Vector direccion){
 	Vector n;
 	Esfera figSphere;
 
 	figSphere = *((Esfera*)(figSolido->figura));
 	n = escalaVector(restaVector(punto, figSphere.c),-1/figSphere.r);
 	n = escalaVector(n,1/magnitud(n));
+
+	if (pPunto(direccion, n) < 0){
+		n = escalaVector(n, -1);
+	}
 
 	return n;
 }

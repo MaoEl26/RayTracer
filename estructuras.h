@@ -37,7 +37,7 @@ typedef struct
 }Rayo;
 
 typedef float (*Op1)(Solido *i, Rayo rayo);
-typedef Vector (*Op2)(Solido *i, Vector punto);
+typedef Vector (*Op2)(Solido *i, Vector punto, Vector direccion);
 
 typedef struct
 {
@@ -174,7 +174,6 @@ Vector aleatorio(Vector vector){
 	}else{
 		return escalaVector(random,1/valor);
 	}
-
 }
 
 int interseccionSegmento(Rayo s, Rayo r){

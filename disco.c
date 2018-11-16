@@ -56,8 +56,7 @@ void normalizarDisco(disco * fig){
 	fig->d = d;
 }
 
-Vector calcularNormalDisco(Solido *figSolido, Vector punto)
-{
+Vector calcularNormalDisco(Solido *figSolido, Vector punto, Vector direccion){
 	Vector normal;
 	disco fig;
 	fig = *((disco*)(figSolido->figura));
@@ -65,11 +64,14 @@ Vector calcularNormalDisco(Solido *figSolido, Vector punto)
 	normal.y = fig.b;
 	normal.z = fig.c;
 
+	if (pPunto(direccion, normal) < 0){
+		normal = escalaVector(normal, -1);
+	}
+
 	return normal;
 }
 
 float calculoInterseccionDisco(Solido* sol,Rayo rayo){
-
 	disco fig;
 	fig = *((disco*)(sol->figura));
 
@@ -85,7 +87,7 @@ float calculoInterseccionDisco(Solido* sol,Rayo rayo){
 
 	if (denom > EPSILON||denom<EPSILON)
 	{
-		t = -(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z + d)/denom;
+		t = (-(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z)+d)/denom;
 		Vector vectorI = sumaVector(rayo.origen, escalaVector(rayo.direccion,t-0.01));
 
 		if (puntoEnDisco(vectorI, fig) == 1)
@@ -128,5 +130,5 @@ int puntoEnDisco(Vector rayo, disco fig){
 			ret = 0;
 		}
 	}
-	return 1;
+	return ret;
 }

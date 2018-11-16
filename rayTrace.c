@@ -174,14 +174,16 @@ void inicioVectores() {
             objetos[i].normal = normalEsfera;
         }
         if (objetos[i].obj->tipo == 3){
-            printf("Siiiiii\n");
             objetos[i].interseccion = puntoEnPlano;
             objetos[i].normal = calcularNormalPoligono;
         }
         if (objetos[i].obj->tipo == 4){
-            printf("Siiiiii\n");
             objetos[i].interseccion = calculoInterseccionDisco;
             objetos[i].normal = calcularNormalDisco;
+        }
+        if (objetos[i].obj->tipo == 5){
+            objetos[i].interseccion = calculoInterseccionElipse;
+            objetos[i].normal = calcularNormalElipse;
         }
     } 
 }
@@ -189,7 +191,6 @@ void inicioVectores() {
 bool sombra(Rayo rayo){
     for (int i = 0; i < numeroCuerpos; i++)
     {
-        /*calculoInterseccion(rayo,objetos[i].obj*/
         if (objetos[i].interseccion(objetos[i].obj, rayo)>0)
         {
             return true;
@@ -250,7 +251,7 @@ Color choqueRayo(Rayo rayo, int valor){
     if(choque.t > epsilon){
         //figSolido = *(Solido*)(choque.objeto->obj);
         choque.p = sumaVector(rayo.origen, escalaVector(rayo.direccion,choque.t-0.01));
-        choque.n = choque.objeto->normal(choque.objeto->obj, choque.p);
+        choque.n = choque.objeto->normal(choque.objeto->obj, choque.p, rayo.direccion);
 
         //choque.n = escalaVector(restaVector(choque.p, figSphere.c),-1/figSphere.r);
         //choque.n = escalaVector(choque.n,1/magnitud(choque.n));
@@ -411,7 +412,7 @@ void display(){
     disco figSphere;
     cuerpo* figBody;
     
-    for (int i = 0; i < numeroCuerpos; ++i)
+    for (int i = 0; i < 0; ++i)
     {
         figBody = (cuerpo*)objetos[i].obj;
         figSolid = (*(Solido*) figBody);
@@ -440,7 +441,6 @@ void display(){
 
             if (llaveAntiAlias || llaveProfundidad) {
                 color = AntiAlias(i,j);
-
             } else {
                 color = choqueRayo(analisisRayoVision(i,j,e), 5);
             }

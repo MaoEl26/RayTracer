@@ -21,7 +21,7 @@ void* leerDisco();
 
 void normalizarDisco(disco *fig);
 
-Vector calcularNormalDisco(Solido *figSolido, Vector punto);
+Vector calcularNormalDisco(Solido *figSolido, Vector punto, Vector direccion);
 
 float calculoInterseccionDisco(Solido* sol,Rayo rayo);
 

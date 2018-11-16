@@ -1,8 +1,8 @@
 #include "elipse.h"
 
 void* leerElipse(){
-
 	elipse * fig;
+    fig = (elipse*)malloc(sizeof(elipse));
 	float x,y,z;
 	int cant;
 	readInt();
@@ -60,4 +60,77 @@ void normalizarElipse(elipse * fig){
 	fig->b = pcruz.y;
 	fig->c = pcruz.z;
 	fig->d = d;
+}
+
+Vector calcularNormalElipse(Solido *figSolido, Vector punto, Vector direccion){
+    Vector normal;
+    elipse fig;
+    fig = *((elipse*)(figSolido->figura));
+
+    normal.x = fig.a;
+    normal.y = fig.b;
+    normal.z = fig.c;
+
+    printf("%lf nd\n", pPunto(normal, direccion));
+
+    if (pPunto(direccion, normal) < 0){
+        normal = escalaVector(normal, -1);
+    }
+
+    return normal;
+}
+
+float calculoInterseccionElipse(Solido* sol,Rayo rayo){
+    elipse fig;
+    fig = *((elipse*)(sol->figura));
+
+    float a, b, c, d, denom;
+    float t; //*interseccion;
+
+    a = fig.a;
+    b = fig.b;
+    c = fig.c;
+    d = fig.d;
+
+    denom = (a*rayo.direccion.x+b*rayo.direccion.y+c*rayo.direccion.z);
+
+    if (denom > EPSILON||denom<EPSILON)
+    {
+        t = (-(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z)+d)/denom;
+        Vector vectorI = sumaVector(rayo.origen, escalaVector(rayo.direccion,t-0.01));
+
+        if (puntoEnElipse(vectorI, fig) == 1)
+        {
+            printf("punto en elipse\n");
+            //printf("%f",t);
+        }
+        else
+        {
+            t = -1;
+        }
+    }
+    else
+    {
+        t = -1;
+    }
+    return t;
+}
+
+int puntoEnElipse(Vector rayo, elipse fig){
+    //Vector centro;
+    float valor1;
+    float valor2;
+    //centro = fig.puntos[0];
+    int ret = 0;
+
+    valor1 = distanciaEucladiana(rayo,fig.foco1);
+    valor2 = distanciaEucladiana(rayo,fig.foco2);
+    //printf("Valor %f\n",valor);
+
+    if(valor1+valor2<=fig.r) {
+        ret = 1;
+        printf("entro");
+    }
+
+    return ret;
 }
