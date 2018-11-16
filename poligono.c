@@ -163,7 +163,7 @@ float puntoEnPlano(Solido * sol, Rayo rayo) {
 		if (puntoEnFigura(rayo.origen, rayo.direccion, fig) == 1)
 		{
 		    printf("punto en figura");
-			t = -(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z + d)/denom;
+			t = (-(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z)+d)/denom;
 			//printf("%f",t);
 		}
 		else
