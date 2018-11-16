@@ -71,8 +71,6 @@ Vector calcularNormalElipse(Solido *figSolido, Vector punto, Vector direccion){
     normal.y = fig.b;
     normal.z = fig.c;
 
-    printf("%lf nd\n", pPunto(normal, direccion));
-
     if (pPunto(direccion, normal) < 0){
         normal = escalaVector(normal, -1);
     }
@@ -101,8 +99,6 @@ float calculoInterseccionElipse(Solido* sol,Rayo rayo){
 
         if (puntoEnElipse(vectorI, fig) == 1)
         {
-            printf("punto en elipse\n");
-            //printf("%f",t);
         }
         else
         {
@@ -129,7 +125,6 @@ int puntoEnElipse(Vector rayo, elipse fig){
 
     if(valor1+valor2<=fig.r) {
         ret = 1;
-        printf("entro");
     }
 
     return ret;

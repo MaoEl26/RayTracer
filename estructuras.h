@@ -18,17 +18,19 @@ typedef struct
 
 typedef struct
 {
-	int tipo;
-	void* figura;
-	Color color;
-}Solido;
+    float x;
+    float y;
+    float z;
+}Vector;
 
 typedef struct
 {
-	float x;
-	float y;
-	float z;
-}Vector;
+	int tipo;
+	void* figura;
+	float m;
+	Vector v;
+	Color color;
+}Solido;
 
 typedef struct
 {

@@ -6,17 +6,16 @@
 
 typedef struct
 {
-	Vector inicio,fin;
-	float rad;
-	Color color;
+	Vector centro,eje;
+	float rad,d1,d2;
 }cilindro;
 
 void* leerCilindro();
 
 float puntoEnPlano(Solido * sol, Rayo rayo);
 
-//int testFigura(poligono fig, int flag,Vector p);
+float calculoInterseccionCilindro(Solido * sol,Rayo rayo);
 
-//float puntoEnFigura(Vector ojo, Vector p, poligono fig);
+Vector calculoNormalCilindro(Solido *figSolido, Vector punto, Vector direccion);
 
 #endif

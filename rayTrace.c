@@ -173,6 +173,10 @@ void inicioVectores() {
             objetos[i].interseccion = calculoInterseccion;
             objetos[i].normal = normalEsfera;
         }
+        if (objetos[i].obj->tipo == 1){
+            objetos[i].interseccion = calculoInterseccionCilindro;
+            objetos[i].normal = calculoNormalCilindro;
+        }
         if (objetos[i].obj->tipo == 3){
             objetos[i].interseccion = puntoEnPlano;
             objetos[i].normal = calcularNormalPoligono;
