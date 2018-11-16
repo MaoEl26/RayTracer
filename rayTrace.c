@@ -175,7 +175,7 @@ void inicioVectores() {
             objetos[i].interseccion = calculoInterseccion;
             objetos[i].normal = normalEsfera;
         }
-    } 
+    }
 }
 
 bool sombra(Rayo rayo){
