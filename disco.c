@@ -81,11 +81,11 @@ float calculoInterseccionDisco(Solido* sol,Rayo rayo){
 	c = fig.c;
 	d = fig.d;
 
-	denom = (a*rayo.direccion.x+b*rayo.direccion.y+c*rayo.direccion.z);
+    denom = (a*rayo.direccion.x+b*rayo.direccion.y+c*rayo.direccion.z);
 
 	if (denom > EPSILON||denom<EPSILON)
 	{
-		t = -(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z + d)/denom;
+		t = (-(a*rayo.origen.x + b*rayo.origen.y + c*rayo.origen.z)+d)/denom;
 		Vector vectorI = sumaVector(rayo.origen, escalaVector(rayo.direccion,t-0.01));
 
 		if (puntoEnDisco(vectorI, fig) == 1)

@@ -177,6 +177,10 @@ Vector aleatorio(Vector vector){
 
 }
 
+float potenciaCuadrada(float valor){
+    return (valor*valor);
+}
+
 int interseccionSegmento(Rayo s, Rayo r){
 	Vector u,v,w;
 
