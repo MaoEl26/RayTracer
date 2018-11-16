@@ -18,6 +18,7 @@
 #include "rayTrace.h"
 #include "estructuras.h" 
 #include "estructuras.c"
+#include "poligono.h"
 
 unsigned int ancho;
 unsigned int alto;
@@ -50,8 +51,8 @@ float intensidadAmbiente;
 
 Color colorFondo;
 
-bool llaveAntiAlias = true, llaveRefleccion = true;
-bool llaveTransparencia = false, llaveProfundidad = false;
+bool llaveAntiAlias, llaveRefleccion;
+bool llaveTransparencia, llaveProfundidad;
 
 FILE *file; 
 
@@ -165,17 +166,18 @@ void inicioVectores() {
 		objetos[i].id = i;
 		objetos[i].ri = 0;
 		objetos[i].refleccion = 1;
-        printf("solido\n");
         objetos[i].obj = readSolid();
-        printf("leido\n");
-        printf("%d", objetos[i].obj->tipo);
         if (objetos[i].obj->tipo == 0)
         {
-            printf("Siiiiii\n");
             objetos[i].interseccion = calculoInterseccion;
             objetos[i].normal = normalEsfera;
         }
-    }
+        if (objetos[i].obj->tipo == 3){
+            printf("Siiiiii\n");
+            objetos[i].interseccion = puntoEnPlano;
+            objetos[i].normal = calcularNormalPoligono;
+        }
+    } 
 }
 
 bool sombra(Rayo rayo){
@@ -199,8 +201,9 @@ float choqueEscena(Rayo rayo, Choque* choque){
     for(int i=0; i<numeroCuerpos; i++){
         //calculoInterseccion(rayo,objetos[i].obj)
         valor = objetos[i].interseccion(objetos[i].obj, rayo);
-        
+        //printf("%d",valor);
         if (valor > 0 && valor < valorFinal){
+            //printf("%f",valor);
             resultado = valor;
             choque->objeto = &objetos[i]; 
         }
@@ -399,22 +402,23 @@ void display(){
     srand(time(NULL));
 
     Solido figSolid;
-    Esfera figSphere;
+    poligono figSphere;
     cuerpo* figBody;
     
     for (int i = 0; i < numeroCuerpos; ++i)
     {
         figBody = (cuerpo*)objetos[i].obj;
         figSolid = (*(Solido*) figBody);
-        figSphere = (*(Esfera*) figSolid.figura);
+        figSphere = (*(poligono*) figSolid.figura);
         printf("%d\n", i);
-        printf("radio: %f\n", figSphere.r);
+        printf("puntos: %d\n", figSphere.cantidadPuntos);
         printf("r: %f\n", figSolid.color.r);
         printf("g: %f\n", figSolid.color.g);
         printf("b: %f\n", figSolid.color.b);
-        printf("c.x: %f\n", figSphere.c.x);
-        printf("c.y: %f\n", figSphere.c.y);
-        printf("c.z: %f\n", figSphere.c.z);
+        printf("c.x: %f\n", figSphere.c);
+        printf("a: %f\n", figSphere.a);
+        printf("b: %f\n", figSphere.b);
+        printf("d: %f\n", figSphere.d);
     }
 
     //free(figSphere);

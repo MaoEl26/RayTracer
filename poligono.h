@@ -12,17 +12,20 @@ typedef struct
 	float b;
 	float c;
 	float d;
-	Color color;
 }poligono;
 
 void* leerPoligono();
 
-float puntoEnPlano(Solido * sol, Vector ojo, Vector p);
+float puntoEnPlano(Solido * sol, Rayo rayo);
 
 int testFigura(poligono fig, int flag,Vector p);
 
-float puntoEnFigura(Vector ojo, Vector p, poligono fig);
+int puntoEnFigura(Vector ojo, Vector p, poligono fig);
 
 void normalizarPoly(poligono * poly);
+
+Vector calcularNormalPoligono(Solido *figSolido, Vector punto);
+
+int puntoEnSegmento(Vector p,Rayo segmento);
 
 #endif

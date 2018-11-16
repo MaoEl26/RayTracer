@@ -13,7 +13,7 @@ typedef struct
 
 void* leerCilindro();
 
-float puntoEnPlano(Solido * sol, Vector ojo, Vector p);
+float puntoEnPlano(Solido * sol, Rayo rayo);
 
 //int testFigura(poligono fig, int flag,Vector p);
 
