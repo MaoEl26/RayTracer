@@ -189,7 +189,7 @@ void inicioVectores() {
             objetos[i].interseccion = calculoInterseccionElipse;
             objetos[i].normal = calcularNormalElipse;
         }
-    } 
+    }
 }
 
 bool sombra(Rayo rayo){
@@ -210,11 +210,8 @@ float choqueEscena(Rayo rayo, Choque* choque){
     float resultado = -1;
 
     for(int i=0; i<numeroCuerpos; i++){
-        //calculoInterseccion(rayo,objetos[i].obj)
         valor = objetos[i].interseccion(objetos[i].obj, rayo);
-        //printf("%d",valor);
         if (valor > 0 && valor < valorFinal){
-            //printf("%f",valor);
             resultado = valor;
             choque->objeto = &objetos[i]; 
         }
@@ -249,16 +246,11 @@ Color ambiente(Color color){
 
 Color choqueRayo(Rayo rayo, int valor){
     Choque choque;
-    Solido figSolido;
     choqueEscena(rayo,&choque);
 
     if(choque.t > epsilon){
-        //figSolido = *(Solido*)(choque.objeto->obj);
         choque.p = sumaVector(rayo.origen, escalaVector(rayo.direccion,choque.t-0.01));
         choque.n = choque.objeto->normal(choque.objeto->obj, choque.p, rayo.direccion);
-
-        //choque.n = escalaVector(restaVector(choque.p, figSphere.c),-1/figSphere.r);
-        //choque.n = escalaVector(choque.n,1/magnitud(choque.n));
         return shade(choque, rayo, valor);
     }
     return colorFondo;
@@ -298,7 +290,7 @@ bool refraccion(Vector vectorInA, Vector vectorInB, float valor, Vector *temp){
 
     Vector temp1 = escalaVector(restaVector(vectorInA, escalaVector(vectorInB, pPunto(vectorInA, vectorInB))),1/valor);
     float raiz = 1 - (1 - pow(pPunto(vectorInA, vectorInB), 2.0)) / pow(valor, 2.0);
-    
+
     if (raiz < 0) {
         return false;
     }
@@ -306,7 +298,7 @@ bool refraccion(Vector vectorInA, Vector vectorInB, float valor, Vector *temp){
     Vector temp2 = escalaVector(vectorInB,sqrt(raiz));
     *temp = restaVector(temp1, temp2);
     *temp = escalaVector(*temp,1/magnitud(*temp));
-	
+
     return true;
 }
 
@@ -381,7 +373,6 @@ Color shade(Choque choque, Rayo rayo, int valor){
 }
 
 Color AntiAlias(int antiX, int antiY){
-    //float muestras = 6;
     Color color = setColor(0,0,0);
     float x,y;
     float r;
@@ -411,33 +402,7 @@ Color AntiAlias(int antiX, int antiY){
 void display(){
 
     srand(time(NULL));
-
-    Solido figSolid;
-    disco figSphere;
-    cuerpo* figBody;
-    
-    for (int i = 0; i < 0; ++i)
-    {
-        figBody = (cuerpo*)objetos[i].obj;
-        figSolid = (*(Solido*) figBody);
-        figSphere = (*(disco*) figSolid.figura);
-        printf("%d\n", i);
-        printf("puntos: %d\n", figSphere.cantidadPuntos);
-        printf("Radio: %f\n",figSphere.r);
-        printf("Radio pequeño: %f\n",figSphere.rPeq);
-        printf("r: %f\n", figSolid.color.r);
-        printf("g: %f\n", figSolid.color.g);
-        printf("b: %f\n", figSolid.color.b);
-        printf("c: %f\n", figSphere.c);
-        printf("a: %f\n", figSphere.a);
-        printf("b: %f\n", figSphere.b);
-        printf("d: %f\n", figSphere.d);
-    }
-
-    //free(figSphere);
-    //free(figSolid);
-    //free(cuerpo);
-
+    printf("Inicio Ray-Tracer\n");
     for (int i=0; i<ancho-1; i++) {
         for (int j=0; j<alto-1; j++) {
             

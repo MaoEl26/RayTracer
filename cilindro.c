@@ -11,6 +11,7 @@ void* leerCilindro()
 	cilindro* c;
 	//double getDouble(10);
 	c = (cilindro*)malloc(sizeof(cilindro));
+
 	readFloat();
 	r = getFloat(0);
 	g = getFloat(1);
@@ -25,7 +26,6 @@ void* leerCilindro()
 	c->rad = getFloat(0);
 	c->d1 = getFloat(1);
 	c->d2 = getFloat(2);
-	readFloat();
 	return c;
 }
 
@@ -36,17 +36,19 @@ float calculoInterseccionCilindro(Solido * sol,Rayo rayo){
 	cilindro cyl;
 	cyl = *((cilindro*)(sol->figura));
 
+
 	Vector aux, Vectori;
 	aux = restaVector(rayo.origen,cyl.centro);
 
 	a = potenciaCuadrada(rayo.direccion.x) + potenciaCuadrada(rayo.direccion.y) + potenciaCuadrada(rayo.direccion.z)-
-			potenciaCuadrada(pPunto(rayo.direccion,cyl.eje));
+			potenciaCuadrada((rayo.direccion.x*cyl.eje.x+rayo.direccion.y*cyl.eje.y+rayo.direccion.z * cyl.eje.z));
+	//a = pPunto(rayo.direccion,rayo.direccion)-potenciaCuadrada(pPunto(rayo.direccion,cyl.eje));
 
-	b = 2.0*(pPunto(rayo.direccion,aux)-pPunto(rayo.direccion,cyl.eje)*pPunto(aux,cyl.eje));
+	b = -2.0*(pPunto(rayo.direccion,aux)-pPunto(rayo.direccion,cyl.eje)*pPunto(aux,cyl.eje));
 
-	c = pPunto(aux,aux)-potenciaCuadrada(pPunto(aux,cyl.eje))- potenciaCuadrada(cyl.rad);
+	c = pPunto(aux,aux)- potenciaCuadrada(pPunto(aux,cyl.eje))- cyl.rad*cyl.rad;
 
-	discriminante = (b*b-4*a*c);
+	discriminante = ((b*b)-4*a*c);
 
 	if(discriminante < EPSILON){
 		return -1;
@@ -73,9 +75,9 @@ float calculoInterseccionCilindro(Solido * sol,Rayo rayo){
 
 		sol->v = Vectori;
 
-		double d = pPunto(limite,cyl.eje);
+		float d = pPunto(limite,cyl.eje);
 
-		double valor = d/magnitud(cyl.eje);
+        float valor = d/magnitud(cyl.eje);
 
 		if( (valor >= cyl.d1) && (valor <= cyl.d2)){
             t = t1;
@@ -94,7 +96,7 @@ float calculoInterseccionCilindro(Solido * sol,Rayo rayo){
 			valor = d/magnitud(cyl.eje);
 
 			if( (valor >= cyl.d1) && (valor <= cyl.d2)){
-				t = t1;
+				t = t2;
 				sol->m = valor;
 			}else {
 				t = -1;

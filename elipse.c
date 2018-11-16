@@ -83,7 +83,7 @@ float calculoInterseccionElipse(Solido* sol,Rayo rayo){
     fig = *((elipse*)(sol->figura));
 
     float a, b, c, d, denom;
-    float t; //*interseccion;
+    float t;
 
     a = fig.a;
     b = fig.b;
@@ -113,15 +113,13 @@ float calculoInterseccionElipse(Solido* sol,Rayo rayo){
 }
 
 int puntoEnElipse(Vector rayo, elipse fig){
-    //Vector centro;
+
     float valor1;
     float valor2;
-    //centro = fig.puntos[0];
     int ret = 0;
 
     valor1 = distanciaEucladiana(rayo,fig.foco1);
     valor2 = distanciaEucladiana(rayo,fig.foco2);
-    //printf("Valor %f\n",valor);
 
     if(valor1+valor2<=fig.r) {
         ret = 1;

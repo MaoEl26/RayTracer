@@ -76,7 +76,7 @@ float calculoInterseccionDisco(Solido* sol,Rayo rayo){
 	fig = *((disco*)(sol->figura));
 
 	float a, b, c, d, denom;
-	float t; //*interseccion;
+	float t;
 
 	a = fig.a;
 	b = fig.b;
@@ -92,9 +92,6 @@ float calculoInterseccionDisco(Solido* sol,Rayo rayo){
 
 		if (puntoEnDisco(vectorI, fig) == 1)
 		{
-			printf("punto en disco");
-
-			//printf("%f",t);
 		}
 		else
 		{
@@ -109,18 +106,13 @@ float calculoInterseccionDisco(Solido* sol,Rayo rayo){
 }
 
 int puntoEnDisco(Vector rayo, disco fig){
-	//Vector centro;
-	float valor;
-	//centro = fig.puntos[0];
+	float valor;;
 	int ret = 0;
 
 	valor = distanciaEucladiana(rayo,fig.centro);
 
-	printf("Valor %f\n",valor);
-
 	if(valor<=fig.r){
 		ret = 1;
-		printf("entro");
 	}
 
 	if ((fig.rPeq > 0) && (ret == 1)) {

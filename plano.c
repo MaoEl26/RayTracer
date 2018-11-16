@@ -3,6 +3,7 @@
 void* leerPlano(){
 
 	plano * fig;
+	fig = (plano*)malloc(sizeof(plano));
 	float x,y,z;
 	int cant;
 	readInt();
@@ -17,6 +18,9 @@ void* leerPlano(){
 		z = getFloat(2);
 		fig->puntos[i] = setVector(x,y,z);
 	}
+	normalizarPlano(fig);
+
+	return fig;
 }
 
 void normalizarPlano(plano * fig){
@@ -42,3 +46,4 @@ void normalizarPlano(plano * fig){
 	fig->c = pcruz.z;
 	fig->d = d;
 }
+
